@@ -1,12 +1,33 @@
-<header class="navbar navbar-fixed-top navbar-inverse">
-  <div class="container">
-    <%= link_to "sample app", root_path, id: "logo" %>
+<header class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    
+    <%#= link_to "Open Traits Data Registry", root_path, id: "logo" %>
+
+    <ul class="nav navbar-nav">
+      <li><%= link_to "Trait Registry", root_path %></li>
+    </ul>
+
+
     <nav>
       <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to "Home", root_path %></li>
-        <li><%= link_to "Help", help_path %></li>
+
+        <li>
+          <%= link_to 'New Dataset', new_dataset_path %>
+        </li>
+        
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            Data <b class="caret"></b>
+          </a>
+          <ul class="dropdown-menu">
+            <li><%= link_to "Datasets", datasets_path %></li>
+            <li><%= link_to "Traits", traits_path %></li>
+            <li><%= link_to "Taxa", taxa_path %></li>
+          </ul>
+        </li>
+
         <% if logged_in? %>
-          <li><%= link_to "Users", users_path %></li>
+          <li><%= link_to "Contributors", users_path %></li>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               Account <b class="caret"></b>

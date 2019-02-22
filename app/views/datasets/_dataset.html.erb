@@ -1,0 +1,17 @@
+<li class="list-group-item">
+  <div class="row">
+    <div class="col-sm-1" style="color: lightgrey;">
+      <%= dataset.id %>
+    </div>
+
+    <div class="col-sm-9">
+      <%= link_to dataset.dataset_name, dataset %>
+    </div>
+
+    <div class="col-sm-2">
+      <% if logged_in? && current_user.admin? || current_user?(dataset.user) %>
+        <%= link_to "delete", dataset, method: :delete, data: { confirm: "You sure?" }, class: "btn  btn-xs btn-danger pull-right" %>
+      <% end %>
+    </div>
+  </div>
+</li>

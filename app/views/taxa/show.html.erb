@@ -1,0 +1,31 @@
+<h1>
+  <%= @taxon.taxon_name %>
+</h1>
+
+<div class="col-md-8 col-md-offset-2">
+
+  <p>
+    <strong>Taxon GUID:</strong>
+    <%= @taxon.taxon_guid %>
+  </p>
+
+  <p>
+    <strong>Dataset:</strong>
+    <% if @taxon.dataset.present? %>
+      <%= link_to @taxon.dataset.id, dataset_path(@taxon.dataset) %>
+    <% else %>
+      <span class="label label-danger">not added</span>
+    <% end %>
+  </p>
+
+
+  <p>
+    <div class="btn-group">
+      <%= link_to 'Back', taxa_path, class: "btn btn-xs btn-default" %>
+      <% if current_user.admin? || current_user?(@taxon.dataset.user) %>
+        <%= link_to 'Edit', edit_taxon_path(@taxon), class: "btn btn-xs btn-default" %>
+      <% end %>
+    </div>
+  </p>
+
+</div>

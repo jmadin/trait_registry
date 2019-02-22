@@ -9,6 +9,10 @@
 
 /* universal */
 
+div.btn-group form{
+  display: inline;
+}
+
 body {
   padding-top: 60px;
 }
@@ -237,10 +241,9 @@ input {
 
 .users {
   list-style: none;
-  margin: 0;
   li {
-    overflow: auto;
-    padding: 10px 0;
+    overflow: none;
+    padding: 10px;
     border-bottom: 1px solid $gray-lighter;
   }
 }

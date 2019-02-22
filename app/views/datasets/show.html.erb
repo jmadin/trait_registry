@@ -1,0 +1,80 @@
+<h1><%= @dataset.dataset_name %></h1>
+
+
+
+<div class="col-md-8 col-md-offset-2">
+
+  <p>
+	  <strong>Dataset link:</strong>
+		<% if @dataset.doi_dataset.present? %>
+	  	<%= link_to @dataset.doi_dataset, "http://dx.doi.org/" + @dataset.doi_dataset, :target => "_blank" %>
+		<% else %>
+      <span class="label label-danger">not added</span>
+		<% end %>
+	</p>
+
+  <p>
+	  <strong>Associated reference:</strong>
+		<% if @dataset.doi_reference.present? %>
+	  	<%= link_to @dataset.doi_reference, "http://dx.doi.org/" + @dataset.doi_reference, :target => "_blank" %>
+		<% else %>
+      <span class="label label-danger">not added</span>
+		<% end %>
+	</p>
+
+  <p>
+	  <strong>Contributor:</strong>
+		<% if @dataset.user.present? %>
+	  	<%= link_to "#{@dataset.user.first_name} #{@dataset.user.last_name}", user_path(@dataset.user) %>
+		<% else %>
+			No record
+		<% end %>
+	</p>
+
+  <p>
+    <strong>Brief description:</strong>
+    <%= @dataset.description %>
+  </p>
+
+  <p>
+    <strong>Terms of use:</strong>
+    <%= @dataset.license %>
+  </p>
+
+  <p>
+    <strong>Taxonomic group:</strong>
+    <%= @dataset.taxonomic_group %>
+  </p>
+
+  <p>
+    <strong>Taxa:</strong>
+    <% if @dataset.taxa.present? %>
+      <% @dataset.taxa.each do |taxon| %>
+        <%= link_to taxon.taxon_name, taxon_path(taxon) %>
+      <% end %>
+    <% else %>
+      <span class="label label-danger">not added</span>
+    <% end %>
+  </p>
+
+  <p>
+    <strong>Traits:</strong>
+    <% if @dataset.traits.present? %>
+      <% @dataset.traits.each do |trait| %>
+        <%= link_to trait.trait_name, trait_path(trait) %>
+      <% end %>
+    <% else %>
+      <span class="label label-danger">not added</span>
+    <% end %>
+  </p>
+
+  <p>
+    <div class="btn-group">
+      <%= link_to 'Back', datasets_path, class: "btn btn-xs btn-default" %>
+      <% if logged_in? && current_user?(@dataset.user) %>
+        <%= link_to 'Edit', edit_dataset_path(@dataset), class: "btn btn-xs btn-default" %>
+      <% end %>
+    </div>
+  </p>
+
+</div>

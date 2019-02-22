@@ -1,0 +1,48 @@
+<%= form_for(@dataset) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  
+  <%= f.label :dataset_name %>
+  <%= f.text_field :dataset_name, class: 'form-control' %>
+
+  <%= f.label :doi_dataset %>
+  <%= f.text_field :doi_dataset, class: 'form-control' %>
+
+  <%= f.label :doi_reference %>
+  <%= f.text_field :doi_reference, class: 'form-control' %>
+
+  <%= f.label :description %>
+  <%= f.text_area :description, class: 'form-control' %>
+
+  <%= f.label "Terms of use" %>
+  <%= f.text_field :license, class: 'form-control' %>
+
+  <%= f.label :taxonomic_group %>
+  <%= f.text_field :taxonomic_group, class: 'form-control' %>
+
+  <h5>Taxa</h5>
+
+  <%= f.fields_for :taxa do |taxon| %>
+    <%= render 'taxon_fields', f: taxon %>
+  <% end %>
+  <div>
+    <%= link_to_add_association 'Add taxon', f, :taxa, class: "btn btn-xs btn-default" %>
+  </div>
+  
+  <br>
+  <h5>Traits</h5>
+
+  <%= f.fields_for :traits do |trait| %>
+    <%= render 'trait_fields', f: trait %>
+  <% end %>
+  <div>
+    <%= link_to_add_association 'Add trait', f, :traits, class: "btn btn-xs btn-default" %>
+  </div>
+  
+  <br>
+  <%= f.label "Contributor" %>
+  <%= current_user.first_name %> <%= current_user.last_name %>
+  <%= f.hidden_field :user_id, :value => current_user.id %>
+
+  <hr>
+  <%= f.submit class: "btn btn-primary" %>
+<% end %>

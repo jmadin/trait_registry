@@ -1,24 +1,39 @@
-<% provide(:title, @user.name) %>
-<div class="row">
-  <aside class="col-md-4">
-    <section>
-      <h1>
-        <%= gravatar_for @user %>
-        <%= @user.name %>
-      </h1>
-    </section>
-    <section class="stats">
-      <%= render 'shared/stats' %>
-    </section>
-  </aside>
-  <div class="col-md-8">
-    <%= render 'follow_form' if logged_in? %>
-    <% if @user.microposts.any? %>
-      <h3>Microposts (<%= @user.microposts.count %>)</h3>
-      <ol class="microposts">
-        <%= render @microposts %>
-      </ol>
-      <%= will_paginate @microposts %>
+<% provide(:title, @user.first_name) %>
+
+<h1>
+  <%= @user.first_name %> <%= @user.last_name %>
+</h1>
+
+
+<div class="col-md-8 col-md-offset-2">
+
+  <p>
+    <strong>Institution:</strong>
+    <%= @user.institution %>
+  </p>
+
+  <p>
+    <strong>Email:</strong>
+    <%= @user.email %>
+  </p>
+
+  <p>
+    <strong>Datasets:</strong>
+    <% if @user.datasets.present? %>
+
+      <ul class="list-group">
+        <%= render @user.datasets %>
+      </ul>
+
+    <% else %>
+      <span class="label label-danger">none</span>
     <% end %>
-  </div>
+  </p>
+
+  <% if current_user.admin? && !current_user?(@user) %>
+    <%= link_to "delete", @user, method: :delete, data: { confirm: "You sure?" }, class: "btn  btn-xs btn-danger pull-right" %>
+  <% end %>
+
+  <%= link_to 'Back', users_path %>
+
 </div>

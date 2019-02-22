@@ -1,0 +1,16 @@
+<%= form_for(@taxon) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  
+  <%= f.label :taxon_name %>
+  <%= f.text_field :taxon_name, class: 'form-control' %>
+
+  <%= f.label :taxon_guid %>
+  <%= f.text_field :taxon_guid, class: 'form-control' %>
+
+  <%= f.label :dataset_id %>
+  <%= taxon.dataset_id %>
+  <%= f.hidden_field :dataset_id, :value => taxon.dataset_id %>
+
+  <hr>
+  <%= f.submit class: "btn btn-primary" %>
+<% end %>

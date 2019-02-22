@@ -1,18 +1,83 @@
-# Ruby on Rails Tutorial sample application
+# Open Traits Registry
 
-This is the reference implementation of the sample application for the 4th edition of [*Ruby on Rails Tutorial: Learn Web Development with Rails*](http://www.railstutorial.org/) by [Michael Hartl](http://www.michaelhartl.com/).
+rails generate scaffold Dataset dataset_name:string doi_dataset:string doi_reference:string description:text license:string taxonomic_group:string user:references
 
-## Help page
+rails generate scaffold Trait trait_name:string trait_guid:string description:text user:references
 
-For general help on the Rails Tutorial, see the [Rails Tutorial Help page](https://www.railstutorial.org/help).
+rails generate scaffold Trait trait_name:string trait_guid:string description:text user:references
 
-## License
+rails generate migration AddDatasetToTraits dataset:references
 
-All source code in the [Ruby on Rails Tutorial](http://railstutorial.org/) is available jointly under the MIT License and the Beerware License. See [LICENSE.md](LICENSE.md) for details.
+rails generate scaffold Taxon taxon_name:string taxon_guid:string dataset:references
 
-## Getting started
+rails generate migration DatasetsTrait dataset:references trait:references
+datasets_traits
 
-To get started with the app, clone the repo and then install the needed gems:
+rails generate migration RemoveUserFromTrait
+
+rails generate migration AddDatabasetoTrait
+
+
+
+
+
+rails generate controller Microposts
+
+Dataset name
+Brief description
+DOI or URL
+Terms of use
+List of traits* (for searching, and also for broader controlled vocabulary/ontology)
+Geographic extent (for searching)
+Taxonomic group* (for searching)
+Temporal extent (for searching)
+
+Recommended or if applicable
+DOI for paper to cite (or actual citation if no DOI)
+Description
+List of taxa (for improved searching)
+Other useful classes (e.g., life stage, body part, etc.) if the dataset more focused
+Data standard used? – if not the OT standard Caterina is working on. 
+
+
+
+class CreateDatasets < ActiveRecord::Migration[5.0]
+  def change
+    create_table :datasets do |t|
+      t.string :dataset_name
+      t.string :doi_dataset
+      t.string :doi_reference
+      t.text :description
+      t.string :license
+      t.string :taxonomic_group
+
+      t.references :user, foreign_key: true
+
+      t.timestamps
+    end
+  end
+end
+
+class AddPaperToDatasets < ActiveRecord::Migration[5.0]
+  def change
+    add_column :datasets, :paper, :string
+  end
+end
+
+
+class CreateTraits < ActiveRecord::Migration[5.0]
+  def change
+    create_table :traits do |t|
+      t.string :trait_name
+      t.string :trait_guid
+
+      t.timestamps
+    end
+  end
+end
+
+
+# To get started with the app, clone the repo and then install the needed gems:
 
 ```
 $ cd /path/to/repos

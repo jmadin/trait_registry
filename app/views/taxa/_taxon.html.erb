@@ -1,0 +1,17 @@
+<li class="list-group-item">
+  <div class="row">
+    <div class="col-sm-1" style="color: lightgrey;">
+      <%= taxon.id %>
+    </div>
+
+    <div class="col-sm-9">
+      <%= link_to taxon.taxon_name, taxon %>
+    </div>
+
+    <div class="col-sm-2">
+      <% if current_user.admin? %>
+        <%= link_to "delete", taxon, method: :delete, data: { confirm: "You sure?" }, class: "btn  btn-xs btn-danger pull-right" %>
+      <% end %>
+    </div>
+  </div>
+</li>

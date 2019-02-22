@@ -1,0 +1,17 @@
+
+<%= form_for(@trait) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  
+  <%= f.label :trait_name %>
+  <%= f.text_field :trait_name, class: 'form-control' %>
+
+  <%= f.label :trait_guid %>
+  <%= f.text_field :trait_guid, class: 'form-control' %>
+
+  <%= f.label :dataset_id %>
+  <%= trait.dataset_id %>
+  <%= f.hidden_field :dataset_id, :value => trait.dataset_id %>
+
+  <hr>
+  <%= f.submit class: "btn btn-primary" %>
+<% end %>
