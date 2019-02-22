@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 20190222190206) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "datasets", force: :cascade do |t|
     t.string "dataset_name"
     t.string "doi_dataset"
@@ -19,20 +22,20 @@ ActiveRecord::Schema.define(version: 20190222190206) do
     t.text "description"
     t.string "license"
     t.string "taxonomic_group"
-    t.integer "user_id"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_datasets_on_user_id"
   end
 
   create_table "datasets_traits", id: false, force: :cascade do |t|
-    t.integer "dataset_id"
-    t.integer "trait_id"
+    t.bigint "dataset_id"
+    t.bigint "trait_id"
     t.index ["dataset_id"], name: "index_datasets_traits_on_dataset_id"
     t.index ["trait_id"], name: "index_datasets_traits_on_trait_id"
   end
 
-  create_table "taggings", force: :cascade do |t|
+  create_table "taggings", id: :serial, force: :cascade do |t|
     t.integer "tag_id"
     t.string "taggable_type"
     t.integer "taggable_id"
@@ -51,7 +54,7 @@ ActiveRecord::Schema.define(version: 20190222190206) do
     t.index ["tagger_id"], name: "index_taggings_on_tagger_id"
   end
 
-  create_table "tags", force: :cascade do |t|
+  create_table "tags", id: :serial, force: :cascade do |t|
     t.string "name"
     t.integer "taggings_count", default: 0
     t.index ["name"], name: "index_tags_on_name", unique: true
@@ -60,7 +63,7 @@ ActiveRecord::Schema.define(version: 20190222190206) do
   create_table "taxa", force: :cascade do |t|
     t.string "taxon_name"
     t.string "taxon_guid"
-    t.integer "dataset_id"
+    t.bigint "dataset_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["dataset_id"], name: "index_taxa_on_dataset_id"
@@ -72,11 +75,11 @@ ActiveRecord::Schema.define(version: 20190222190206) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "dataset_id"
+    t.bigint "dataset_id"
     t.index ["dataset_id"], name: "index_traits_on_dataset_id"
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", id: :serial, force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
     t.string "institution"
@@ -95,4 +98,7 @@ ActiveRecord::Schema.define(version: 20190222190206) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "datasets", "users"
+  add_foreign_key "taxa", "datasets"
+  add_foreign_key "traits", "datasets"
 end
