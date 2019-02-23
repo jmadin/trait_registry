@@ -1,6 +1,8 @@
 <%= form_for(@dataset) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
   
+  <p>*These inputs are super preliminary. Just trying out some ideas from the table in Google sheets.</p>
+  
   <%= f.label :dataset_name %>
   <%= f.text_field :dataset_name, class: 'form-control' %>
 
