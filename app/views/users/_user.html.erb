@@ -4,8 +4,14 @@
       <%= user.id %>
     </div>
 
-    <div class="col-sm-9">
+    <div class="col-sm-8">
       <%= link_to "#{user.first_name} #{user.last_name}", user %>
+    </div>
+
+    <div class="col-sm-1">
+      <% if user.admin %>
+        <span class="glyphicon glyphicon-globe"></span>
+      <% end %>
     </div>
 
     <div class="col-sm-2">
