@@ -7,16 +7,16 @@
   <p>
 	  <strong>Dataset link:</strong>
 		<% if @dataset.doi_dataset.present? %>
-	  	<%= link_to @dataset.doi_dataset, "http://dx.doi.org/" + @dataset.doi_dataset, :target => "_blank" %>
+	  	<%= link_to @dataset.doi_dataset, "" + @dataset.doi_dataset, :target => "_blank" %>
 		<% else %>
       <span class="label label-danger">not added</span>
 		<% end %>
 	</p>
 
   <p>
-	  <strong>Associated reference:</strong>
+	  <strong>Reference link:</strong>
 		<% if @dataset.doi_reference.present? %>
-	  	<%= link_to @dataset.doi_reference, "http://dx.doi.org/" + @dataset.doi_reference, :target => "_blank" %>
+	  	<%= link_to @dataset.doi_reference, "" + @dataset.doi_reference, :target => "_blank" %>
 		<% else %>
       <span class="label label-danger">not added</span>
 		<% end %>
