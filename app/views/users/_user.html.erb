@@ -15,7 +15,7 @@
     </div>
 
     <div class="col-sm-2">
-      <% if current_user.admin? && current_user?(user) %>
+      <% if current_user.admin? && !current_user?(user) %>
         <%= link_to "delete", user, method: :delete, data: { confirm: "You sure?" }, class: "btn  btn-xs btn-danger pull-right" %>
       <% end %>
     </div>
