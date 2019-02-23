@@ -13,9 +13,20 @@
   </p>
 
   <p>
-    <strong>Email:</strong>
-    <%= @user.email %>
-  </p>
+		<strong>Email:</strong>
+		<% if @user.email.present? %>
+			<%= mail_to @user.email, @user.email, {:subject => "Trait Registry data enquiry"} %>
+		<% end %>
+	</p>
+
+  <p>
+	  <strong>ORCID:</strong>
+		<% if @user.orcid.present? %>
+	  	<%= link_to @user.orcid, "https://orcid.org/" + @user.orcid, :target => "_blank" %>
+		<% else %>
+      <span class="label label-danger">not added</span>
+		<% end %>
+	</p>
 
   <p>
     <strong>Datasets:</strong>
