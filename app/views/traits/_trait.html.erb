@@ -9,7 +9,7 @@
     </div>
 
     <div class="col-sm-2">
-      <% if current_user.admin? %>
+      <% if logged_in? && current_user.admin? %>
         <%= link_to "delete", trait, method: :delete, data: { confirm: "You sure?" }, class: "btn  btn-xs btn-danger pull-right" %>
       <% end %>
     </div>

@@ -23,8 +23,8 @@
 
   <p>
     <div class="btn-group">
-      <%= link_to 'Back', taxa_path, class: "btn btn-xs btn-default" %>
-      <% if current_user.admin? || current_user?(@trait.dataset.user) %>
+      <%= link_to 'Back', traits_path, class: "btn btn-xs btn-default" %>
+      <% if logged_in? && current_user.admin? || current_user?(@trait.dataset.user) %>
         <%= link_to 'Edit', edit_trait_path(@trait), class: "btn btn-xs btn-default" %>
       <% end %>
     </div>
