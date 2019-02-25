@@ -1,18 +1,20 @@
-<h1>
-  <%= @taxon.taxon_name %>
-</h1>
+<h1>Taxon: <%= @taxon.taxon_name %></h1>
 
 <div class="col-md-8 col-md-offset-2">
 
   <p>
     <strong>Taxon GUID:</strong>
-    <%= @taxon.taxon_guid %>
+    <% if @taxon.taxon_guid.present? %>
+      <%= @taxon.taxon_guid %>
+    <% else %>
+      <span class="label label-warning">not added</span>
+    <% end %>
   </p>
 
   <p>
     <strong>Dataset:</strong>
     <% if @taxon.dataset.present? %>
-      <%= link_to @taxon.dataset.id, dataset_path(@taxon.dataset) %>
+      <%= link_to @taxon.dataset.id, dataset_path(@taxon.dataset), class: "label label-default" %>
     <% else %>
       <span class="label label-danger">not added</span>
     <% end %>

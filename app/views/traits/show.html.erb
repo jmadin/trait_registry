@@ -1,21 +1,29 @@
-<h1><%= @trait.trait_name %></h1>
+<h1>Trait: <%= @trait.trait_name %></h1>
 
 <div class="col-md-8 col-md-offset-2">
 
   <p>
     <strong>Trait GUID:</strong>
-    <%= @trait.trait_guid %>
+    <% if @trait.trait_guid.present? %>
+      <%= @trait.trait_guid %>
+    <% else %>
+      <span class="label label-warning">not added</span>
+    <% end %>
   </p>
 
   <p>
     <strong>Description:</strong>
-    <%= @trait.description %>
+    <% if @trait.description.present? %>
+      <%= @trait.description %>
+    <% else %>
+      <span class="label label-warning">not added</span>
+    <% end %>
   </p>
 
   <p>
     <strong>Dataset:</strong>
     <% if @trait.dataset.present? %>
-      <%= link_to @trait.dataset.id, dataset_path(@trait.dataset) %>
+      <%= link_to @trait.dataset.id, dataset_path(@trait.dataset), class: "label label-default" %>
     <% else %>
       <span class="label label-danger">not added</span>
     <% end %>

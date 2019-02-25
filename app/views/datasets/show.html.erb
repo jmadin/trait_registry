@@ -9,7 +9,7 @@
 		<% if @dataset.doi_dataset.present? %>
 	  	<%= link_to @dataset.doi_dataset, "" + @dataset.doi_dataset, :target => "_blank" %>
 		<% else %>
-      <span class="label label-danger">not added</span>
+      <span class="label label-warning">not added</span>
 		<% end %>
 	</p>
 
@@ -18,7 +18,7 @@
 		<% if @dataset.doi_reference.present? %>
 	  	<%= link_to @dataset.doi_reference, "" + @dataset.doi_reference, :target => "_blank" %>
 		<% else %>
-      <span class="label label-danger">not added</span>
+      <span class="label label-warning">not added</span>
 		<% end %>
 	</p>
 
@@ -33,27 +33,40 @@
 
   <p>
     <strong>Brief description:</strong>
-    <%= @dataset.description %>
+    <% if @dataset.description.present? %>
+      <%= @dataset.description %>
+    <% else %>
+      <span class="label label-warning">not added</span>
+    <% end %>
   </p>
+
 
   <p>
     <strong>Terms of use:</strong>
-    <%= @dataset.license %>
+    <% if @dataset.license.present? %>
+      <%= @dataset.license %>
+    <% else %>
+      <span class="label label-warning">not added</span>
+    <% end %>
   </p>
 
   <p>
     <strong>Taxonomic group:</strong>
-    <%= @dataset.taxonomic_group %>
+    <% if @dataset.taxonomic_group.present? %>
+      <%= @dataset.taxonomic_group %>
+    <% else %>
+      <span class="label label-warning">not added</span>
+    <% end %>
   </p>
 
   <p>
     <strong>Taxa:</strong>
     <% if @dataset.taxa.present? %>
       <% @dataset.taxa.each do |taxon| %>
-        <%= link_to taxon.taxon_name, taxon_path(taxon) %>
+        <%= link_to taxon.taxon_name, taxon_path(taxon), class: "label label-default" %>
       <% end %>
     <% else %>
-      <span class="label label-danger">not added</span>
+      <span class="label label-warning">not added</span>
     <% end %>
   </p>
 
@@ -61,10 +74,10 @@
     <strong>Traits:</strong>
     <% if @dataset.traits.present? %>
       <% @dataset.traits.each do |trait| %>
-        <%= link_to trait.trait_name, trait_path(trait) %>
+        <%= link_to trait.trait_name, trait_path(trait), class: "label label-default" %>
       <% end %>
     <% else %>
-      <span class="label label-danger">not added</span>
+      <span class="label label-warning">not added</span>
     <% end %>
   </p>
 
